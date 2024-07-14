@@ -1,22 +1,19 @@
-//
-//  TokensView.swift
-//  DexScreener
-//
-//  Created by Waqas on 7/14/24.
-//
-
-
-
 import SwiftUI
 
 struct TokensView: View {
-    @ObservedObject var viewModel: TokensViewModel = TokensViewModel()
+    @State private var tokens: [Token] = [
+        Token(name: "Bitcoin", price: 34000.0, transactions: 1500, volume24h: 500000.0),
+        Token(name: "Ethereum", price: 2100.0, transactions: 2500, volume24h: 300000.0),
+        Token(name: "Litecoin", price: 150.0, transactions: 500, volume24h: 20000.0)
+    ]
 
     var body: some View {
-        List(viewModel.tokens) { token in
-            TokenRow(token: token)
+        NavigationView {
+            List(tokens) { token in
+                TokenRow(token: token)
+            }
+            .navigationBarTitle("Tokens")
         }
-        .navigationBarTitle("Tokens")
     }
 }
 
@@ -28,15 +25,13 @@ struct TokenRow: View {
             VStack(alignment: .leading) {
                 Text(token.name)
                     .font(.headline)
-                Text("Price: $\(token.price)")
+                Text("Price: \(token.price)")
                 Text("Txns: \(token.transactions)")
-                Text("24h V: $\(token.volume24h)")
+                Text("24h V: \(token.volume24h)")
             }
-            .padding(.vertical, 8)
-
             Spacer()
         }
-        .padding(.horizontal, 16)
+        .padding()
     }
 }
 

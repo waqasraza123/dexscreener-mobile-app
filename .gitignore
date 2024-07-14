@@ -1,0 +1,80 @@
+# Xcode
+.DS_Store
+*.swp
+*~.nib
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcworkspace
+!default.xcworkspace
+xcuserdata
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# SwiftUI Previews
+.swiftUIPreviews/
+
+# User-specific files
+*.xcuserdatad
+*.xcuserdata
+*.scmblueprint
+
+# Logs
+*.log
+
+# Derived data
+DerivedData/
+build/
+
+# Code Coverage
+*.xcresult
+
+# Swift
+*.swiftsourceinfo
+*.swiftdoc
+
+# Carthage
+Carthage/Build/
+
+# CocoaPods
+Pods/
+Podfile.lock
+Podfile
+.project.xcworkspace/
+.project.xcworkspace.xcuserdata/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/docs
+
+# Reveal
+revealmobile.framework
+.reveal/
+
+# Other
+*.orig
+*.so
+*.dylib
+*.o
+*.a
+*README.html
+*.entitlements
+
+# Swift Package Manager
+.build/
+.Package.resolved
+
+# SPM Build Folder
+.build/
+
+# IDE specific folders
+.idea/
+
