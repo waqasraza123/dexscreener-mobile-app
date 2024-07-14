@@ -7,18 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77A5C8322C43BE65008B3350 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A5C8312C43BE65008B3350 /* Token.swift */; };
+		77A5C8362C43BEF4008B3350 /* TokensViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A5C8352C43BEF4008B3350 /* TokensViewModel.swift */; };
+		77A5C8382C43BF30008B3350 /* TokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A5C8372C43BF30008B3350 /* TokensView.swift */; };
 		77FBAB842C4392C000707C3D /* DexScreenerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBAB832C4392C000707C3D /* DexScreenerApp.swift */; };
 		77FBAB862C4392C000707C3D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBAB852C4392C000707C3D /* ContentView.swift */; };
 		77FBAB882C4392C100707C3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77FBAB872C4392C100707C3D /* Assets.xcassets */; };
 		77FBAB8B2C4392C100707C3D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77FBAB8A2C4392C100707C3D /* Preview Assets.xcassets */; };
+		77FBAB922C43975E00707C3D /* Signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBAB912C43975E00707C3D /* Signup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		77A5C8312C43BE65008B3350 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		77A5C8352C43BEF4008B3350 /* TokensViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensViewModel.swift; sourceTree = "<group>"; };
+		77A5C8372C43BF30008B3350 /* TokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensView.swift; sourceTree = "<group>"; };
 		77FBAB802C4392C000707C3D /* DexScreener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DexScreener.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77FBAB832C4392C000707C3D /* DexScreenerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DexScreenerApp.swift; sourceTree = "<group>"; };
 		77FBAB852C4392C000707C3D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		77FBAB872C4392C100707C3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77FBAB8A2C4392C100707C3D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		77FBAB912C43975E00707C3D /* Signup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +40,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		77A5C8302C43BE3E008B3350 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				77A5C8312C43BE65008B3350 /* Token.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		77A5C8332C43BEDD008B3350 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				77A5C8352C43BEF4008B3350 /* TokensViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		77A5C8342C43BEE2008B3350 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				77A5C8372C43BF30008B3350 /* TokensView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		77FBAB772C4392C000707C3D = {
 			isa = PBXGroup;
 			children = (
@@ -51,10 +83,14 @@
 		77FBAB822C4392C000707C3D /* DexScreener */ = {
 			isa = PBXGroup;
 			children = (
+				77A5C8342C43BEE2008B3350 /* Views */,
+				77A5C8332C43BEDD008B3350 /* ViewModels */,
+				77A5C8302C43BE3E008B3350 /* Models */,
 				77FBAB832C4392C000707C3D /* DexScreenerApp.swift */,
 				77FBAB852C4392C000707C3D /* ContentView.swift */,
 				77FBAB872C4392C100707C3D /* Assets.xcassets */,
 				77FBAB892C4392C100707C3D /* Preview Content */,
+				77FBAB912C43975E00707C3D /* Signup.swift */,
 			);
 			path = DexScreener;
 			sourceTree = "<group>";
@@ -137,8 +173,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77A5C8362C43BEF4008B3350 /* TokensViewModel.swift in Sources */,
 				77FBAB862C4392C000707C3D /* ContentView.swift in Sources */,
+				77A5C8382C43BF30008B3350 /* TokensView.swift in Sources */,
 				77FBAB842C4392C000707C3D /* DexScreenerApp.swift in Sources */,
+				77FBAB922C43975E00707C3D /* Signup.swift in Sources */,
+				77A5C8322C43BE65008B3350 /* Token.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
