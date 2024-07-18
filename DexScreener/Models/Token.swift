@@ -1,7 +1,13 @@
 import Foundation
 
+struct TokenResponse: Decodable {
+    var pairs: [Token]
+}
+
 struct Token: Identifiable, Decodable {
-    var id = UUID()
+    var id: String {
+        baseToken.address
+    }
     var baseToken: TokenDetails
     var quoteToken: TokenDetails
     var priceUsd: String

@@ -16,10 +16,9 @@ class TokensViewModel: ObservableObject {
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data {
                 do {
-                    print(data)
-                    let decodedResponse = try JSONDecoder().decode([Token].self, from: data)
+                    let decodedResponse = try JSONDecoder().decode(TokenResponse.self, from: data)
                     DispatchQueue.main.async {
-                        self.tokens = decodedResponse
+                        self.tokens = decodedResponse.pairs
                     }
                 } catch {
                     print("Failed to decode JSON: \(error)")
