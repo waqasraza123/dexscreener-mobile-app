@@ -1,23 +1,32 @@
-//
-//  TokensViewModel.swift
-//  DexScreener
-//
-//  Created by Waqas on 7/14/24.
-//
-
 import Foundation
-
 
 class TokensViewModel: ObservableObject {
     @Published var tokens: [Token] = []
 
     init() {
-        // Dummy data (replace with API call)
-        tokens = [
-            Token(name: "Bitcoin", price: 34000.0, transactions: 1500, volume24h: 500000.0),
-            Token(name: "Ethereum", price: 2100.0, transactions: 2500, volume24h: 300000.0),
-            Token(name: "Cardano", price: 1.5, transactions: 800, volume24h: 10000.0),
-            Token(name: "Solana", price: 35.0, transactions: 1200, volume24h: 80000.0)
-        ]
+        fetchTokens()
+    }
+
+    func fetchTokens() {
+        guard let url = URL(string: Constants.solanaApiUrl) else {
+            print("Invalid URL")
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data {
+                do {
+                    print(data)
+                    let decodedResponse = try JSONDecoder().decode([Token].self, from: data)
+                    DispatchQueue.main.async {
+                        self.tokens = decodedResponse
+                    }
+                } catch {
+                    print("Failed to decode JSON: \(error)")
+                }
+            } else if let error = error {
+                print("Failed to fetch data: \(error)")
+            }
+        }.resume()
     }
 }

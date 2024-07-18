@@ -27,7 +27,7 @@ struct ContentView: View {
 
             Button(action: {
                 // Simulate login
-                if username == "admin" && password == "admin" {
+                if username.lowercased() == "admin" && password == "admin" {
                     isLoggedIn = true
                 } else {
                     // Handle invalid credentials

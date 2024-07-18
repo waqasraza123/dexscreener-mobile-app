@@ -1,37 +1,31 @@
 import SwiftUI
 
 struct TokensView: View {
-    @State private var tokens: [Token] = [
-        Token(name: "Bitcoin", price: 34000.0, transactions: 1500, volume24h: 500000.0),
-        Token(name: "Ethereum", price: 2100.0, transactions: 2500, volume24h: 300000.0),
-        Token(name: "Litecoin", price: 150.0, transactions: 500, volume24h: 20000.0)
-    ]
+    @ObservedObject var viewModel: TokensViewModel
+
+    init(viewModel: TokensViewModel = TokensViewModel()) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
         NavigationView {
-            List(tokens) { token in
-                TokenRow(token: token)
+            List(viewModel.tokens) { token in
+                VStack(alignment: .leading) {
+                    Text("\(token.baseToken.symbol) / \(token.quoteToken.symbol)")
+                        .font(.headline)
+                    Text("Price: \(token.priceUsd)")
+                    Text("24h Volume: \(token.volume.h24)")
+                    Text("Transactions (Last 24h):")
+                    Text("  Buys: \(token.txns.h24.buys)")
+                    Text("  Sells: \(token.txns.h24.sells)")
+                }
+                .padding()
             }
             .navigationBarTitle("Tokens")
-        }
-    }
-}
-
-struct TokenRow: View {
-    var token: Token
-
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(token.name)
-                    .font(.headline)
-                Text("Price: \(token.price)")
-                Text("Txns: \(token.transactions)")
-                Text("24h V: \(token.volume24h)")
+            .onAppear {
+                viewModel.fetchTokens()
             }
-            Spacer()
         }
-        .padding()
     }
 }
 
