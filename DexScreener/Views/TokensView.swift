@@ -9,15 +9,21 @@ struct TokensView: View {
 
     var body: some View {
         NavigationView {
-            List(viewModel.tokens) { token in
+            ScrollView {
                 VStack(alignment: .leading) {
-                    Text("\(token.baseToken.symbol) / \(token.quoteToken.symbol)")
-                        .font(.headline)
-                    Text("Price: \(token.priceUsd)")
-                    Text("24h Volume: \(token.volume.h24)")
-                    Text("Transactions (Last 24h):")
-                    Text("  Buys: \(token.txns.h24.buys)")
-                    Text("  Sells: \(token.txns.h24.sells)")
+                    ForEach(viewModel.tokens) { token in
+                        VStack(alignment: .leading) {
+                            Text("\(token.baseToken.symbol) / \(token.quoteToken.symbol)")
+                                .font(.headline)
+                            Text("Price: \(token.priceUsd)")
+                            Text("24h Volume: \(token.volume.h24)")
+                            Text("Transactions (Last 24h):")
+                            Text("  Buys: \(token.txns.h24.buys)")
+                            Text("  Sells: \(token.txns.h24.sells)")
+                        }
+                        .padding()
+                        Divider() // Add a divider between tokens for better separation
+                    }
                 }
                 .padding()
             }
