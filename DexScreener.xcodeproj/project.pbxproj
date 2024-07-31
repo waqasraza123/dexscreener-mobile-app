@@ -11,6 +11,7 @@
 		77A5C8322C43BE65008B3350 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A5C8312C43BE65008B3350 /* Token.swift */; };
 		77A5C8362C43BEF4008B3350 /* TokensViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A5C8352C43BEF4008B3350 /* TokensViewModel.swift */; };
 		77A5C8382C43BF30008B3350 /* TokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A5C8372C43BF30008B3350 /* TokensView.swift */; };
+		77B6E5E02C58F81100D3040D /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B6E5DF2C58F81100D3040D /* FilterView.swift */; };
 		77FBAB842C4392C000707C3D /* DexScreenerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBAB832C4392C000707C3D /* DexScreenerApp.swift */; };
 		77FBAB862C4392C000707C3D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBAB852C4392C000707C3D /* ContentView.swift */; };
 		77FBAB882C4392C100707C3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77FBAB872C4392C100707C3D /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 		77A5C8312C43BE65008B3350 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		77A5C8352C43BEF4008B3350 /* TokensViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensViewModel.swift; sourceTree = "<group>"; };
 		77A5C8372C43BF30008B3350 /* TokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensView.swift; sourceTree = "<group>"; };
+		77B6E5DF2C58F81100D3040D /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		77FBAB802C4392C000707C3D /* DexScreener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DexScreener.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77FBAB832C4392C000707C3D /* DexScreenerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DexScreenerApp.swift; sourceTree = "<group>"; };
 		77FBAB852C4392C000707C3D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				77A5C8372C43BF30008B3350 /* TokensView.swift */,
+				77B6E5DF2C58F81100D3040D /* FilterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 				77A5C8362C43BEF4008B3350 /* TokensViewModel.swift in Sources */,
 				77FBAB862C4392C000707C3D /* ContentView.swift in Sources */,
 				77A5C8382C43BF30008B3350 /* TokensView.swift in Sources */,
+				77B6E5E02C58F81100D3040D /* FilterView.swift in Sources */,
 				77FBAB842C4392C000707C3D /* DexScreenerApp.swift in Sources */,
 				77149B5B2C490DD800B2DE6F /* Constants.swift in Sources */,
 				77FBAB922C43975E00707C3D /* Signup.swift in Sources */,
