@@ -13,34 +13,58 @@ struct Top100CryptocurrenciesView: View {
                     Text("Error: \(errorMessage)")
                         .foregroundColor(.red)
                 } else {
-                    List(viewModel.cryptocurrencies) { crypto in
+                    VStack {
+                        // Table Header
                         HStack {
-                            AsyncImage(url: URL(string: crypto.image)) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 50, height: 50)
-                            } placeholder: {
-                                ProgressView()
-                                    .frame(width: 50, height: 50)
-                            }
-                            
-                            VStack(alignment: .leading) {
-                                Text(crypto.name)
-                                    .font(.headline)
-                                Text("Symbol: \(crypto.symbol.uppercased())")
-                                    .font(.subheadline)
-                                Text("Price: $\(crypto.current_price, specifier: "%.2f")")
-                                    .font(.body)
-                                Text("Market Cap: $\(crypto.market_cap, specifier: "%.2f")")
-                                    .font(.body)
-                            }
+                            Text("ID")
+                                .frame(width: 120, alignment: .leading)
+                                .font(.headline)
+                            Text("Price")
+                                .frame(width: 100, alignment: .trailing)
+                                .font(.headline)
+                            Text("MC")
+                                .frame(width: 120, alignment: .trailing)
+                                .font(.headline)
                         }
-                        .padding()
+                        .padding(.bottom, 5)
+                        
+                        // Table Data
+                        ScrollView {
+                            VStack(alignment: .leading) {
+                                ForEach(viewModel.cryptocurrencies) { crypto in
+                                    HStack {
+                                        HStack {
+                                            AsyncImage(url: URL(string: crypto.image)) { image in
+                                                image
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 30, height: 30)
+                                            } placeholder: {
+                                                ProgressView()
+                                                    .frame(width: 30, height: 30)
+                                            }
+                                            .clipShape(Circle())
+                                            
+                                            Text(crypto.symbol.uppercased())
+                                        }
+                                        .frame(width: 120, alignment: .leading)
+                                        
+                                        Text("$\(crypto.current_price, specifier: "%.2f")")
+                                            .frame(width: 100, alignment: .trailing)
+                                        
+                                        Text(formattedMarketCap(crypto.market_cap))
+                                            .frame(width: 130, alignment: .trailing)
+                                    }
+                                    .padding(.vertical, 5)
+                                }
+                            }
+                            .padding(.horizontal)
+                        }
                     }
+                    .padding()
                 }
             }
-            .navigationBarTitle("Top 100+ Cryptocurrencies")
+            .navigationBarTitle("Top 100+ Tokens")
             .onAppear {
                 viewModel.fetchCryptocurrencies()
             }

@@ -12,6 +12,7 @@
 		77161CB22C5BDD15000FE121 /* GeckoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77161CB12C5BDD15000FE121 /* GeckoViewModel.swift */; };
 		77161CB42C5BDD8A000FE121 /* Top100CryptocurrenciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77161CB32C5BDD8A000FE121 /* Top100CryptocurrenciesView.swift */; };
 		7767FAEB2C5A091F002BFA0A /* TokenChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7767FAEA2C5A091F002BFA0A /* TokenChartView.swift */; };
+		779C61EE2C5CBDA800A7FCAD /* FormatMarketCap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779C61ED2C5CBDA800A7FCAD /* FormatMarketCap.swift */; };
 		77A5C8322C43BE65008B3350 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A5C8312C43BE65008B3350 /* Token.swift */; };
 		77A5C8362C43BEF4008B3350 /* TokensViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A5C8352C43BEF4008B3350 /* TokensViewModel.swift */; };
 		77A5C8382C43BF30008B3350 /* TokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A5C8372C43BF30008B3350 /* TokensView.swift */; };
@@ -30,6 +31,7 @@
 		77161CB12C5BDD15000FE121 /* GeckoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeckoViewModel.swift; sourceTree = "<group>"; };
 		77161CB32C5BDD8A000FE121 /* Top100CryptocurrenciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Top100CryptocurrenciesView.swift; sourceTree = "<group>"; };
 		7767FAEA2C5A091F002BFA0A /* TokenChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenChartView.swift; sourceTree = "<group>"; };
+		779C61ED2C5CBDA800A7FCAD /* FormatMarketCap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatMarketCap.swift; sourceTree = "<group>"; };
 		77A5C8312C43BE65008B3350 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		77A5C8352C43BEF4008B3350 /* TokensViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensViewModel.swift; sourceTree = "<group>"; };
 		77A5C8372C43BF30008B3350 /* TokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensView.swift; sourceTree = "<group>"; };
@@ -54,6 +56,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		779C61EC2C5CBD7400A7FCAD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				779C61ED2C5CBDA800A7FCAD /* FormatMarketCap.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		77A5C8302C43BE3E008B3350 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +113,7 @@
 		77FBAB822C4392C000707C3D /* DexScreener */ = {
 			isa = PBXGroup;
 			children = (
+				779C61EC2C5CBD7400A7FCAD /* Helpers */,
 				77A5C8342C43BEE2008B3350 /* Views */,
 				77A5C8332C43BEDD008B3350 /* ViewModels */,
 				77A5C8302C43BE3E008B3350 /* Models */,
@@ -203,6 +214,7 @@
 				77FBAB842C4392C000707C3D /* DexScreenerApp.swift in Sources */,
 				77149B5B2C490DD800B2DE6F /* Constants.swift in Sources */,
 				77161CB22C5BDD15000FE121 /* GeckoViewModel.swift in Sources */,
+				779C61EE2C5CBDA800A7FCAD /* FormatMarketCap.swift in Sources */,
 				77161CB02C5BDCA2000FE121 /* GeckoToken.swift in Sources */,
 				77FBAB922C43975E00707C3D /* Signup.swift in Sources */,
 				77A5C8322C43BE65008B3350 /* Token.swift in Sources */,
