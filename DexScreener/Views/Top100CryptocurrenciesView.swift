@@ -2,6 +2,7 @@ import SwiftUI
 
 struct Top100CryptocurrenciesView: View {
     @StateObject private var viewModel = GeckoViewModel()
+    @State private var selectedCrypto: Crypto? // Replace with your data model
     
     var body: some View {
         NavigationView {
@@ -70,6 +71,7 @@ struct Top100CryptocurrenciesView: View {
                                     .padding(.vertical, 5)
                                     .onTapGesture {
                                         viewModel.fetchOHLCData(for: crypto.id)
+                                        selectedCrypto = crypto // Store the selected crypto
                                     }
                                 }
                             }
@@ -83,6 +85,15 @@ struct Top100CryptocurrenciesView: View {
             .onAppear {
                 viewModel.fetchCryptocurrencies()
             }
+            .background(
+                NavigationLink(
+                    destination: OHLCChartView(ohlcData: viewModel.ohlcData),
+                    isActive: Binding(
+                        get: { selectedCrypto != nil },
+                        set: { _ in selectedCrypto = nil }
+                    )
+                ) { EmptyView() }
+            )
         }
     }
 }
