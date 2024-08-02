@@ -38,7 +38,7 @@ class GeckoViewModel: ObservableObject {
     }
     
     
-    func fetchOHLCData(for tokenId: String) {
+    func fetchOHLCData(for tokenId: String, completion: @escaping (Result<[OHLCData], Error>) -> Void) {
         let endpoint = "/gecko/ohlc-chart-data/\(tokenId)"
         guard let url = URL(string: Constants.apiUrl + endpoint) else {
             print("Invalid URL")
@@ -48,11 +48,13 @@ class GeckoViewModel: ObservableObject {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("Error fetching OHLC data: \(error.localizedDescription)")
+                completion(.failure(error))
                 return
             }
             
             guard let data = data else {
                 print("No data received")
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
                 return
             }
             
@@ -82,10 +84,11 @@ class GeckoViewModel: ObservableObject {
                 }
                 
                 DispatchQueue.main.async {
-                    self.ohlcData = fetchedData
+                    completion(.success(fetchedData))
                 }
             } catch {
                 print("Error decoding OHLC data: \(error.localizedDescription)")
+                completion(.failure(error))
             }
         }
         task.resume()
