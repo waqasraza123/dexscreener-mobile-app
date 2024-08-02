@@ -2,7 +2,7 @@ import SwiftUI
 
 struct Top100CryptocurrenciesView: View {
     @StateObject private var viewModel = GeckoViewModel()
-    @State private var selectedTokenId: String?
+    @State private var selectedCrypto: GeckoToken?
     
     var body: some View {
         NavigationStack {
@@ -69,21 +69,9 @@ struct Top100CryptocurrenciesView: View {
                                             .frame(width: 130, alignment: .trailing)
                                     }
                                     .padding(.vertical, 5)
-                                    .background(
-                                        NavigationLink(
-                                            destination: OHLCChartView(tokenId: crypto.id),
-                                            isActive: Binding(
-                                                get: { selectedTokenId == crypto.id },
-                                                set: { isActive in
-                                                    if !isActive {
-                                                        selectedTokenId = nil
-                                                    }
-                                                }
-                                            )
-                                        ) { EmptyView() }
-                                    )
                                     .onTapGesture {
-                                        selectedTokenId = crypto.id // Store the selected tokenId
+                                        viewModel.fetchOHLCData(for: crypto.id)
+                                        selectedCrypto = crypto // Store the selected crypto
                                     }
                                 }
                             }
@@ -96,6 +84,13 @@ struct Top100CryptocurrenciesView: View {
             .navigationTitle("Top 100+ Tokens")
             .onAppear {
                 viewModel.fetchCryptocurrencies()
+            }
+            .navigationDestination(for: GeckoToken.self) { crypto in
+                if selectedCrypto != nil {
+                    OHLCChartView(ohlcData: viewModel.ohlcData)
+                } else {
+                    EmptyView()
+                }
             }
         }
     }
