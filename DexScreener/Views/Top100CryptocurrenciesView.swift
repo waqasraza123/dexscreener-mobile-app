@@ -56,6 +56,9 @@ struct Top100CryptocurrenciesView: View {
                                             .frame(width: 130, alignment: .trailing)
                                     }
                                     .padding(.vertical, 5)
+                                    .onTapGesture {
+                                        viewModel.fetchOHLCData(for: crypto.id)
+                                    }
                                 }
                             }
                             .padding(.horizontal)
