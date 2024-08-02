@@ -57,13 +57,7 @@ class GeckoViewModel: ObservableObject {
                 completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
                 return
             }
-            
-            // Print the raw data as a string
-            if let jsonString = String(data: data, encoding: .utf8) {
-                print("Received OHLC data: \(jsonString)")
-            } else {
-                print("Unable to convert data to string")
-            }
+        
             
             do {
                 // Decode the data as an array of arrays
