@@ -3,7 +3,8 @@ import SwiftUI
 struct Top100CryptocurrenciesView: View {
     @StateObject private var viewModel = GeckoViewModel()
     @State private var selectedCrypto: GeckoToken?
-    
+    @State private var isNavigating: Bool = false // Track navigation state
+
     var body: some View {
         NavigationStack {
             Group {
@@ -69,9 +70,23 @@ struct Top100CryptocurrenciesView: View {
                                             .frame(width: 130, alignment: .trailing)
                                     }
                                     .padding(.vertical, 5)
+                                    .background(
+                                        NavigationLink(
+                                            destination: OHLCChartView(ohlcData: viewModel.ohlcData),
+                                            isActive: Binding(
+                                                get: { selectedCrypto == crypto && isNavigating },
+                                                set: { newValue in
+                                                    if newValue {
+                                                        isNavigating = false
+                                                    }
+                                                }
+                                            )
+                                        ) { EmptyView() }
+                                    )
                                     .onTapGesture {
                                         viewModel.fetchOHLCData(for: crypto.id)
                                         selectedCrypto = crypto // Store the selected crypto
+                                        isNavigating = true // Trigger navigation
                                     }
                                 }
                             }
@@ -84,9 +99,6 @@ struct Top100CryptocurrenciesView: View {
             .navigationTitle("Top 100+ Tokens")
             .onAppear {
                 viewModel.fetchCryptocurrencies()
-            }
-            .navigationDestination(for: GeckoToken.self) { crypto in
-                OHLCChartView(ohlcData: viewModel.ohlcData)
             }
         }
     }

@@ -8,7 +8,7 @@ struct OHLCChartView: View {
         VStack {
             Chart(ohlcData) { dataPoint in
                 LineMark(
-                    x: .value("Date", dataPoint.date),
+                    x: .value("Date", dataPoint.timestamp),
                     y: .value("Price", dataPoint.close)
                 )
             }
