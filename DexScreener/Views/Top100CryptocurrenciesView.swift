@@ -5,7 +5,7 @@ struct Top100CryptocurrenciesView: View {
     @State private var selectedCrypto: GeckoToken?
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Group {
                 if viewModel.isLoading {
                     ProgressView("Loading...") // Show loading indicator
@@ -81,19 +81,13 @@ struct Top100CryptocurrenciesView: View {
                     .padding()
                 }
             }
-            .navigationBarTitle("Top 100+ Tokens")
+            .navigationTitle("Top 100+ Tokens")
             .onAppear {
                 viewModel.fetchCryptocurrencies()
             }
-            .background(
-                NavigationLink(
-                    destination: OHLCChartView(ohlcData: viewModel.ohlcData),
-                    isActive: Binding(
-                        get: { selectedCrypto != nil },
-                        set: { _ in selectedCrypto = nil }
-                    )
-                ) { EmptyView() }
-            )
+            .navigationDestination(for: GeckoToken.self) { crypto in
+                OHLCChartView(ohlcData: viewModel.ohlcData)
+            }
         }
     }
 }

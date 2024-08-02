@@ -1,4 +1,4 @@
-struct GeckoToken: Identifiable, Codable {
+struct GeckoToken: Identifiable, Codable, Hashable, Equatable {
     var id: String
     var symbol: String
     var name: String
@@ -30,5 +30,15 @@ struct GeckoToken: Identifiable, Codable {
         var times: Double
         var currency: String
         var percentage: Double
+    }
+    
+    // Conformance to Hashable
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    // Conformance to Equatable
+    static func == (lhs: GeckoToken, rhs: GeckoToken) -> Bool {
+        return lhs.id == rhs.id
     }
 }

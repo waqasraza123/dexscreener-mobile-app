@@ -6,7 +6,7 @@ struct OHLCChartView: View {
 
     var body: some View {
         VStack {
-            Chart(data: ohlcData) { dataPoint in
+            Chart(ohlcData) { dataPoint in
                 LineMark(
                     x: .value("Date", dataPoint.date),
                     y: .value("Price", dataPoint.close)
@@ -22,7 +22,8 @@ struct OHLCChartView: View {
     }
 }
 
-struct OHLCData {
+struct OHLCData: Identifiable, Decodable {
+    var id = UUID()
     let date: Date
     let open: Double
     let high: Double
