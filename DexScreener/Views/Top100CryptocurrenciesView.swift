@@ -2,9 +2,8 @@ import SwiftUI
 
 struct Top100CryptocurrenciesView: View {
     @StateObject private var viewModel = GeckoViewModel()
-    @State private var selectedCrypto: GeckoToken?
-    @State private var isNavigating: Bool = false // Track navigation state
-
+    @State private var selectedTokenId: String?
+    
     var body: some View {
         NavigationStack {
             Group {
@@ -72,21 +71,19 @@ struct Top100CryptocurrenciesView: View {
                                     .padding(.vertical, 5)
                                     .background(
                                         NavigationLink(
-                                            destination: OHLCChartView(ohlcData: viewModel.ohlcData),
+                                            destination: OHLCChartView(tokenId: crypto.id),
                                             isActive: Binding(
-                                                get: { selectedCrypto == crypto && isNavigating },
-                                                set: { newValue in
-                                                    if newValue {
-                                                        isNavigating = false
+                                                get: { selectedTokenId == crypto.id },
+                                                set: { isActive in
+                                                    if !isActive {
+                                                        selectedTokenId = nil
                                                     }
                                                 }
                                             )
                                         ) { EmptyView() }
                                     )
                                     .onTapGesture {
-                                        viewModel.fetchOHLCData(for: crypto.id)
-                                        selectedCrypto = crypto // Store the selected crypto
-                                        isNavigating = true // Trigger navigation
+                                        selectedTokenId = crypto.id // Store the selected tokenId
                                     }
                                 }
                             }
