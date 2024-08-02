@@ -24,7 +24,7 @@ struct OHLCChartView: View {
 
 struct OHLCData: Identifiable, Decodable {
     var id = UUID()
-    let date: Date
+    let timestamp: Date
     let open: Double
     let high: Double
     let low: Double

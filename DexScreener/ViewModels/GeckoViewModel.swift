@@ -37,6 +37,7 @@ class GeckoViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
+    
     func fetchOHLCData(for tokenId: String) {
         let endpoint = "/gecko/ohlc-chart-data/\(tokenId)"
         guard let url = URL(string: Constants.apiUrl + endpoint) else {
@@ -55,9 +56,31 @@ class GeckoViewModel: ObservableObject {
                 return
             }
             
+            // Print the raw data as a string
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print("Received OHLC data: \(jsonString)")
+            } else {
+                print("Unable to convert data to string")
+            }
+            
             do {
+                // Decode the data as an array of arrays
                 let decoder = JSONDecoder()
-                let fetchedData = try decoder.decode([OHLCData].self, from: data)
+                let rawData = try decoder.decode([[Double]].self, from: data)
+                
+                // Map the raw data to OHLCData
+                let fetchedData = rawData.compactMap { dataPoint -> OHLCData? in
+                    guard dataPoint.count == 5 else { return nil }
+                    
+                    let timestamp = Date(timeIntervalSince1970: dataPoint[0] / 1000.0)
+                    let open = dataPoint[1]
+                    let high = dataPoint[2]
+                    let low = dataPoint[3]
+                    let close = dataPoint[4]
+                    
+                    return OHLCData(timestamp: timestamp, open: open, high: high, low: low, close: close)
+                }
+                
                 DispatchQueue.main.async {
                     self.ohlcData = fetchedData
                 }
@@ -67,4 +90,5 @@ class GeckoViewModel: ObservableObject {
         }
         task.resume()
     }
+
 }
