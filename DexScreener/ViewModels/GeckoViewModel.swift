@@ -47,7 +47,7 @@ class GeckoViewModel: ObservableObject {
     
     // fetch ohlc (open, high, low, close) values for the token from coingecko api
     func fetchOHLCData(for tokenId: String) {
-        let endpoint = "/gecko/ohlc-chart-data:\(tokenId)"
+        let endpoint = "/gecko/ohlc-chart-data/\(tokenId)"
         guard let url = URL(string: Constants.apiUrl + endpoint) else {
             print("Invalid URL")
             return
@@ -71,7 +71,6 @@ class GeckoViewModel: ObservableObject {
                 print("Error decoding OHLC data: \(error.localizedDescription)")
             }
         }
-            
         task.resume()
     }
 }
