@@ -2,7 +2,7 @@ import SwiftUI
 
 struct Top100CryptocurrenciesView: View {
     @StateObject private var viewModel = GeckoViewModel()
-    @State private var selectedCrypto: Crypto? // Replace with your data model
+    @State private var selectedCrypto: GeckoToken?
     
     var body: some View {
         NavigationView {
