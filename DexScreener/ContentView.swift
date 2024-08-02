@@ -8,7 +8,7 @@ struct ContentView: View {
     var body: some View {
         Group {
             if isLoggedIn {
-                TokensView()
+                HomeView()
             } else {
                 loginView
             }
