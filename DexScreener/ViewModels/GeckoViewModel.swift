@@ -22,9 +22,9 @@ class GeckoViewModel: ObservableObject {
             .map(\.data)
             .handleEvents(receiveOutput: { data in
                 // Print raw data for debugging
-                if let jsonString = String(data: data, encoding: .utf8) {
-                    print("Raw JSON Data: \(jsonString)")
-                }
+//                if let jsonString = String(data: data, encoding: .utf8) {
+//                    print("Raw JSON Data: \(jsonString)")
+//                }
             })
             .decode(type: [GeckoToken].self, decoder: JSONDecoder())
             .receive(on: DispatchQueue.main)
