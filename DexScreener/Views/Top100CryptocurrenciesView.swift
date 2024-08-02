@@ -34,16 +34,28 @@ struct Top100CryptocurrenciesView: View {
                                 ForEach(viewModel.cryptocurrencies) { crypto in
                                     HStack {
                                         HStack {
-                                            AsyncImage(url: URL(string: crypto.image)) { image in
-                                                image
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(width: 30, height: 30)
-                                            } placeholder: {
-                                                ProgressView()
-                                                    .frame(width: 30, height: 30)
+                                            AsyncImage(url: URL(string: crypto.image)) { phase in
+                                                switch phase {
+                                                case .success(let image):
+                                                    image
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(width: 30, height: 30)
+                                                        .clipShape(Circle())
+                                                case .failure(_):
+                                                    Image(systemName: "photo") // Fallback image
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(width: 30, height: 30)
+                                                        .clipShape(Circle())
+                                                case .empty:
+                                                    ProgressView()
+                                                        .frame(width: 30, height: 30)
+                                                        .clipShape(Circle())
+                                                @unknown default:
+                                                    EmptyView()
+                                                }
                                             }
-                                            .clipShape(Circle())
                                             
                                             Text(crypto.symbol.uppercased())
                                         }
