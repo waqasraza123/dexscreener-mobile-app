@@ -14,81 +14,55 @@ struct Top100CryptocurrenciesView: View {
                     Text("Error: \(errorMessage)")
                         .foregroundColor(.red)
                 } else {
-                    VStack {
-                        // Table Header
-                        HStack {
-                            Text("ID")
-                                .frame(width: 120, alignment: .leading)
-                                .font(.headline)
-                            Text("Price")
-                                .frame(width: 100, alignment: .trailing)
-                                .font(.headline)
-                            Text("MC")
-                                .frame(width: 120, alignment: .trailing)
-                                .font(.headline)
-                        }
-                        .padding(.bottom, 5)
-                        
-                        // Table Data
-                        ScrollView {
-                            VStack(alignment: .leading) {
-                                ForEach(viewModel.cryptocurrencies) { crypto in
-                                    NavigationLink(
-                                        destination: OHLCChartView(tokenId: crypto.id),
-                                        tag: crypto,
-                                        selection: $selectedCrypto
-                                    ) {
-                                        HStack {
-                                            HStack {
-                                                AsyncImage(url: URL(string: crypto.image)) { phase in
-                                                    switch phase {
-                                                    case .success(let image):
-                                                        image
-                                                            .resizable()
-                                                            .scaledToFit()
-                                                            .frame(width: 30, height: 30)
-                                                            .clipShape(Circle())
-                                                    case .failure(_):
-                                                        Image(systemName: "photo") // Fallback image
-                                                            .resizable()
-                                                            .scaledToFit()
-                                                            .frame(width: 30, height: 30)
-                                                            .clipShape(Circle())
-                                                    case .empty:
-                                                        ProgressView()
-                                                            .frame(width: 30, height: 30)
-                                                            .clipShape(Circle())
-                                                    @unknown default:
-                                                        EmptyView()
-                                                    }
-                                                }
-                                                
-                                                Text(crypto.symbol.uppercased())
-                                            }
-                                            .frame(width: 120, alignment: .leading)
-                                            
-                                            Text("$\(crypto.current_price, specifier: "%.2f")")
-                                                .frame(width: 100, alignment: .trailing)
-                                            
-                                            Text(formattedMarketCap(crypto.market_cap))
-                                                .frame(width: 130, alignment: .trailing)
+                    List(viewModel.cryptocurrencies) { crypto in
+                        NavigationLink(value: crypto) {
+                            HStack {
+                                HStack {
+                                    AsyncImage(url: URL(string: crypto.image)) { phase in
+                                        switch phase {
+                                        case .success(let image):
+                                            image
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 30, height: 30)
+                                                .clipShape(Circle())
+                                        case .failure(_):
+                                            Image(systemName: "photo") // Fallback image
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 30, height: 30)
+                                                .clipShape(Circle())
+                                        case .empty:
+                                            ProgressView()
+                                                .frame(width: 30, height: 30)
+                                                .clipShape(Circle())
+                                        @unknown default:
+                                            EmptyView()
                                         }
-                                        .padding(.vertical, 5)
                                     }
-                                    .onTapGesture {
-                                        selectedCrypto = crypto // Store the selected crypto
-                                    }
+                                    
+                                    Text(crypto.symbol.uppercased())
                                 }
+                                .frame(width: 120, alignment: .leading)
+                                
+                                Text("$\(crypto.current_price, specifier: "%.2f")")
+                                    .frame(width: 100, alignment: .trailing)
+                                
+                                Text(formattedMarketCap(crypto.market_cap))
+                                    .frame(width: 130, alignment: .trailing)
                             }
-                            .padding(.horizontal)
+                            .padding(.vertical, 5)
                         }
+                        .tag(crypto) // Use tag for navigation to match the selectedCrypto
                     }
-                    .padding()
+                    .navigationTitle("Top 100+ Tokens")
                 }
             }
-            .navigationTitle("Top 100+ Tokens")
             .onAppear {
                 viewModel.fetchCryptocurrencies()
+            }
+            .navigationDestination(for: GeckoToken.self) { crypto in
+                OHLCChartView(tokenId: crypto.id)
             }
         }
     }
