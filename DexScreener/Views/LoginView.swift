@@ -64,6 +64,7 @@ struct LoginView: View {
                             .background(Color.orange)
                             .cornerRadius(15.0)
                     }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.top, 20) // Add padding to top to separate from fields
                     
                     if let errorMessage = errorMessage {
@@ -73,8 +74,7 @@ struct LoginView: View {
                     }
                 }
                 .padding()
-                
-                Spacer()
+
                 
                 NavigationLink(destination: SignUpView()) {
                     Text("Sign Up")
