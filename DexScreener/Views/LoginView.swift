@@ -2,72 +2,58 @@ import SwiftUI
 
 struct LoginView: View {
     @Binding var isLoggedIn: Bool
-      @State private var username: String = ""
-      @State private var password: String = ""
-      @State private var errorMessage: String?
-      @State private var isLoading: Bool = false // State for showing loading spinner
-
-      var body: some View {
+    @State private var username: String = ""
+    @State private var password: String = ""
+    @State private var errorMessage: String?
+    @State private var isLoading: Bool = false // State for showing loading spinner
+    
+    var body: some View {
         VStack {
-          // Title (optional, based on the image)
-          Text("Welcome Back!")
-            .font(.title)
-            .padding(.bottom)
+            if isLoading {
+                // Show loading spinner when isLoading is true
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .scaleEffect(1.5, anchor: .center)
+                    .padding()
+            } else {
+                // Show login UI when not loading
+                TextField("Username", text: $username)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .autocapitalization(.none)
+                    .padding()
 
-          if isLoading {
-            // Show loading spinner when isLoading is true
-            ProgressView()
-              .progressViewStyle(CircularProgressViewStyle())
-              .scaleEffect(1.5, anchor: .center)
-              .padding()
-          } else {
-            // Login Form with rounded corners
-            VStack(spacing: 20) {
-              TextField("Username", text: $username)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .autocapitalization(.none)
-                .padding()
+                SecureField("Password", text: $password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .autocapitalization(.none)
+                    .padding()
 
-              SecureField("Password", text: $password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .autocapitalization(.none)
-                .padding()
+                Button(action: {
+                    login()
+                }) {
+                    Text("Login")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 220, height: 60)
+                        .background(Color.blue)
+                        .cornerRadius(15.0)
+                }
+                
+                NavigationLink(destination: SignUpView()) {
+                    Text("Sign Up")
+                        .foregroundColor(.blue)
+                        .padding()
+                }
+
+                if let errorMessage = errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding()
+                }
             }
-            .background(Color.white)
-            .cornerRadius(15.0)
-            .padding()
-
-            Button(action: {
-              login()
-            }) {
-              Text("Login")
-                .font(.headline)
-                .foregroundColor(.white)
-                .padding()
-                .frame(width: 220, height: 60)
-                .background(Color.blue)
-                .cornerRadius(15.0)
-
-            }
-
-            HStack {
-              Spacer()
-              NavigationLink(destination: SignUpView()) {
-                Text("Sign Up")
-                  .foregroundColor(.blue)
-              }
-            }
-            .padding()
-          }
-
-          if let errorMessage = errorMessage {
-            Text(errorMessage)
-              .foregroundColor(.red)
-              .padding()
-          }
         }
         .padding()
-      }
+    }
     
     func login() {
         let endpoint = "/auth/login"
