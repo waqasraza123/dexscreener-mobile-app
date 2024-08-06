@@ -6,17 +6,26 @@ struct ContentView: View {
     @State private var isLoggedIn: Bool = false
 
     var body: some View {
-        Group {
-            if isLoggedIn {
-                HomeView()
-            } else {
-                loginView
+        NavigationStack {
+            Group {
+                if isLoggedIn {
+                    HomeView()
+                } else {
+                    loginView
+                }
             }
         }
     }
 
     var loginView: some View {
         VStack {
+            // Logo Image
+            Image(systemName: "star.fill") // Replace with your logo image
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100, height: 100)
+                .padding()
+
             TextField("Username", text: $username)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
@@ -41,6 +50,12 @@ struct ContentView: View {
                     .frame(width: 220, height: 60)
                     .background(Color.blue)
                     .cornerRadius(15.0)
+            }
+            
+            NavigationLink(destination: SignUpView()) {
+                Text("Sign Up")
+                    .foregroundColor(.blue)
+                    .padding()
             }
         }
         .padding()
