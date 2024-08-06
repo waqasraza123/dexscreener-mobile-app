@@ -41,6 +41,11 @@ struct SignUpView: View {
                     .background(Color.blue)
                     .cornerRadius(15.0)
             }
+            NavigationLink(destination: loginView()) {
+                Text("Login")
+                    .foregroundColor(.blue)
+                    .padding()
+            }
             .padding()
             
             if isSignUpSuccessful {
