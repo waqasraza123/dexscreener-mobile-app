@@ -8,7 +8,7 @@ struct LoginView: View {
     @State private var isLoading: Bool = false // State for showing loading spinner
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             if isLoading {
                 // Show loading spinner when isLoading is true
                 ProgressView()
@@ -16,13 +16,24 @@ struct LoginView: View {
                     .scaleEffect(1.5, anchor: .center)
                     .padding()
             } else {
-                // Show login UI when not loading
-                TextField("Username", text: $username)
+                // Header text
+                Text("Login")
+                    .font(.title.bold())
+                    .foregroundColor(.black)
+                    .padding(.bottom, 1)
+                
+                Text("Please sign in to continue.")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .padding(.bottom, 20)
+                
+                // Login form
+                TextField("user123@email.com", text: $username)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .autocapitalization(.none)
                     .padding()
 
-                SecureField("Password", text: $password)
+                SecureField("••••••••", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .autocapitalization(.none)
                     .padding()
@@ -30,21 +41,22 @@ struct LoginView: View {
                 Button(action: {
                     login()
                 }) {
-                    Text("Login")
+                    Text("LOGIN")
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
-                        .frame(width: 220, height: 60)
-                        .background(Color.blue)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .background(Color.orange) // Updated button color
                         .cornerRadius(15.0)
                 }
+                .padding(.top, 20) // Add padding to top to separate from fields
                 
                 NavigationLink(destination: SignUpView()) {
                     Text("Sign Up")
-                        .foregroundColor(.blue)
+                        .foregroundColor(.orange)
                         .padding()
                 }
-
+                
                 if let errorMessage = errorMessage {
                     Text(errorMessage)
                         .foregroundColor(.red)
@@ -53,6 +65,14 @@ struct LoginView: View {
             }
         }
         .padding()
+        .background(Color.white) // Background color for the view
+        .navigationBarTitle("Login", displayMode: .inline) // Add back button automatically
+        .navigationBarItems(leading: Button(action: {
+            // Handle back action if necessary
+        }) {
+            Image(systemName: "arrow.left") // Back button
+                .foregroundColor(.black)
+        })
     }
     
     func login() {
