@@ -51,7 +51,7 @@ struct LoginView: View {
                             .cornerRadius(15.0)
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.top, 20) // Add padding to top to separate from fields
+                    .padding(.top, 100) // Add padding to top to separate from fields
                     
                     if let errorMessage = errorMessage {
                         Text(errorMessage)

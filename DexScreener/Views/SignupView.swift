@@ -56,15 +56,18 @@ struct SignUpView: View {
                         .background(Color.orange)
                         .cornerRadius(15.0)
                 }
+                .frame(maxWidth: .infinity, alignment: .trailing) //button alignment
                 .padding(.top, 20)
                 
                 NavigationLink(destination: LoginView(isLoggedIn: $isSignUpSuccessful)) {
-                    Text("Already have a acoount?")
-                        .foregroundColor(.gray)
-                        .frame(alignment: Alignment.trailing)
-                    Text("Sign in")
-                        .foregroundColor(.orange)
-                        .padding()
+                    VStack {
+                        Text("Already have an account?")
+                            .foregroundColor(.gray)
+                        Text("Sign in")
+                            .foregroundColor(.orange)
+                            .padding()
+                    }
+                    .frame(maxWidth: .infinity, alignment: .center)
                 }
                 .padding(.top, 100)
                 .padding(.bottom, 20)
