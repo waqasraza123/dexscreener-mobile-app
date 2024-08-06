@@ -1,20 +1,5 @@
 import SwiftUI
 
-struct CustomTextFieldStyle: TextFieldStyle {
-    var height: CGFloat
-    var cornerRadius: CGFloat
-    var padding: CGFloat
-
-    func _body(configuration: TextField<_Label>) -> some View {
-        configuration
-            .padding(padding)
-            .background(Color.white)
-            .cornerRadius(cornerRadius)
-            .frame(height: height)
-            .overlay(RoundedRectangle(cornerRadius: cornerRadius)
-                        .stroke(Color.gray, lineWidth: 1))
-    }
-}
 
 struct SignUpView: View {
     @State private var email: String = ""
