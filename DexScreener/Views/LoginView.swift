@@ -1,18 +1,19 @@
-//
-//  LoginView.swift
-//  DexScreener
-//
-//  Created by waqas on 06/08/2024.
-//
 import SwiftUI
 
 struct LoginView: View {
     @Binding var isLoggedIn: Bool
     @State private var username: String = ""
     @State private var password: String = ""
-
+    @State private var errorMessage: String?
+    
     var body: some View {
         VStack {
+            // Logo Image
+            Image(systemName: "star.fill") // Replace with your logo image
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100, height: 100)
+                .padding()
 
             TextField("Username", text: $username)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -25,13 +26,7 @@ struct LoginView: View {
                 .padding()
 
             Button(action: {
-                // Simulate login
-                if username.lowercased() == "admin" && password == "admin" {
-                    isLoggedIn = true
-                } else {
-                    // Handle invalid credentials
-                    print("Invalid credentials")
-                }
+                login()
             }) {
                 Text("Login")
                     .font(.headline)
@@ -47,8 +42,68 @@ struct LoginView: View {
                     .foregroundColor(.blue)
                     .padding()
             }
+
+            if let errorMessage = errorMessage {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .padding()
+            }
         }
         .padding()
+    }
+    
+    func login() {
+        let endpoint = "/auth/login"
+        guard let url = URL(string: Constants.apiUrl + endpoint) else {
+            errorMessage = "Invalid URL"
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+
+        let parameters: [String: String] = [
+            "email": username,
+            "password": password
+        ]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    errorMessage = "Error: \(error.localizedDescription)"
+                }
+                return
+            }
+
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    errorMessage = "No data received"
+                }
+                return
+            }
+            
+            do {
+                // Decode the response JSON
+                let responseJSON = try JSONSerialization.jsonObject(with: data, options: [])
+                if let responseJSON = responseJSON as? [String: Any], let user = responseJSON["user"] as? [String: Any] {
+                    // Handle successful login
+                    DispatchQueue.main.async {
+                        isLoggedIn = true
+                        errorMessage = nil
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        errorMessage = "Invalid credentials"
+                    }
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    errorMessage = "Error parsing response: \(error.localizedDescription)"
+                }
+            }
+        }.resume()
     }
 }
 
