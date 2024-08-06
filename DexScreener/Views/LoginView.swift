@@ -66,13 +66,6 @@ struct LoginView: View {
         }
         .padding()
         .background(Color.white) // Background color for the view
-        .navigationBarTitle("Login", displayMode: .inline) // Add back button automatically
-        .navigationBarItems(leading: Button(action: {
-            // Handle back action if necessary
-        }) {
-            Image(systemName: "arrow.left") // Back button
-                .foregroundColor(.black)
-        })
     }
     
     func login() {
