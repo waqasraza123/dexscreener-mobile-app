@@ -1,5 +1,21 @@
 import SwiftUI
 
+struct CustomTextFieldStyle: TextFieldStyle {
+    var height: CGFloat
+    var cornerRadius: CGFloat
+    var padding: CGFloat
+
+    func _body(configuration: TextField<_Label>) -> some View {
+        configuration
+            .padding(padding)
+            .background(Color.white)
+            .cornerRadius(cornerRadius)
+            .frame(height: height)
+            .overlay(RoundedRectangle(cornerRadius: cornerRadius)
+                        .stroke(Color.gray, lineWidth: 1))
+    }
+}
+
 struct SignUpView: View {
     @State private var email: String = ""
     @State private var password: String = ""
@@ -9,52 +25,66 @@ struct SignUpView: View {
     
     var body: some View {
         VStack {
-            TextField("Email", text: $email)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .autocapitalization(.none)
-                .padding()
-            
-            SecureField("Password", text: $password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .autocapitalization(.none)
-                .padding()
-            
-            SecureField("Confirm Password", text: $confirmPassword)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .autocapitalization(.none)
-                .padding()
-            
-            if let errorMessage = errorMessage {
-                Text(errorMessage)
-                    .foregroundColor(.red)
-                    .padding()
-            }
-            
-            Button(action: {
-                signUp()
-            }) {
-                Text("Sign Up")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 220, height: 60)
-                    .background(Color.blue)
-                    .cornerRadius(15.0)
-            }
-            NavigationLink(destination: LoginView(isLoggedIn: $isSignUpSuccessful)) {
-                Text("Login")
-                    .foregroundColor(.blue)
-                    .padding()
-            }
-            .padding()
-            
             if isSignUpSuccessful {
                 Text("Sign Up Successful!")
                     .foregroundColor(.green)
                     .padding()
             }
+
+            VStack(alignment: .leading) {
+                Text("Sign Up")
+                    .font(.title.bold())
+                    .foregroundColor(.black)
+                    .padding(.bottom, 1)
+                
+                Text("Create an account to get started.")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .padding(.bottom, 20)
+                
+                TextField("Email", text: $email)
+                    .textFieldStyle(CustomTextFieldStyle(height: 50, cornerRadius: 10, padding: 16))
+                    .autocapitalization(.none)
+                
+                SecureField("Password", text: $password)
+                    .textFieldStyle(CustomTextFieldStyle(height: 50, cornerRadius: 10, padding: 16))
+                    .autocapitalization(.none)
+                
+                SecureField("Confirm Password", text: $confirmPassword)
+                    .textFieldStyle(CustomTextFieldStyle(height: 50, cornerRadius: 10, padding: 16))
+                    .autocapitalization(.none)
+                
+                if let errorMessage = errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding()
+                }
+                
+                Button(action: {
+                    signUp()
+                }) {
+                    Text("Sign Up")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 220, height: 60)
+                        .background(Color.blue)
+                        .cornerRadius(15.0)
+                }
+                .padding(.top, 20)
+                
+                Spacer() // Pushes the Login button to the bottom
+                
+                NavigationLink(destination: LoginView(isLoggedIn: $isSignUpSuccessful)) {
+                    Text("Login")
+                        .foregroundColor(.blue)
+                        .padding()
+                }
+                .padding(.bottom, 20) // Add padding to bottom for spacing
+            }
+            .padding()
         }
-        .padding()
+        .background(Color.white) // Background color for the view
     }
     
     func signUp() {
@@ -112,5 +142,11 @@ struct SignUpView: View {
                 }
             }
         }.resume()
+    }
+}
+
+struct SignUpView_Previews: PreviewProvider {
+    static var previews: some View {
+        SignUpView()
     }
 }
