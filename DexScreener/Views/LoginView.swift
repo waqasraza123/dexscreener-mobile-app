@@ -5,42 +5,51 @@ struct LoginView: View {
     @State private var username: String = ""
     @State private var password: String = ""
     @State private var errorMessage: String?
+    @State private var isLoading: Bool = false // State for showing loading spinner
     
     var body: some View {
         VStack {
-
-            TextField("Username", text: $username)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .autocapitalization(.none)
-                .padding()
-
-            SecureField("Password", text: $password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .autocapitalization(.none)
-                .padding()
-
-            Button(action: {
-                login()
-            }) {
-                Text("Login")
-                    .font(.headline)
-                    .foregroundColor(.white)
+            if isLoading {
+                // Show loading spinner when isLoading is true
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .scaleEffect(1.5, anchor: .center)
                     .padding()
-                    .frame(width: 220, height: 60)
-                    .background(Color.blue)
-                    .cornerRadius(15.0)
-            }
-            
-            NavigationLink(destination: SignUpView()) {
-                Text("Sign Up")
-                    .foregroundColor(.blue)
+            } else {
+                // Show login UI when not loading
+                TextField("Username", text: $username)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .autocapitalization(.none)
                     .padding()
-            }
 
-            if let errorMessage = errorMessage {
-                Text(errorMessage)
-                    .foregroundColor(.red)
+                SecureField("Password", text: $password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .autocapitalization(.none)
                     .padding()
+
+                Button(action: {
+                    login()
+                }) {
+                    Text("Login")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 220, height: 60)
+                        .background(Color.blue)
+                        .cornerRadius(15.0)
+                }
+                
+                NavigationLink(destination: SignUpView()) {
+                    Text("Sign Up")
+                        .foregroundColor(.blue)
+                        .padding()
+                }
+
+                if let errorMessage = errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding()
+                }
             }
         }
         .padding()
@@ -63,7 +72,15 @@ struct LoginView: View {
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
 
+        // Set isLoading to true when the login starts
+        isLoading = true
+
         URLSession.shared.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                // Set isLoading to false when the login completes
+                isLoading = false
+            }
+
             if let error = error {
                 DispatchQueue.main.async {
                     errorMessage = "Error: \(error.localizedDescription)"
