@@ -13,19 +13,15 @@ struct LoginView: View {
 
     var body: some View {
         VStack {
-            // Logo Image
-            Image(systemName: "star.fill") // Replace with your logo image
-                .resizable()
-                .scaledToFit()
-                .frame(width: 100, height: 100)
-                .padding()
 
             TextField("Username", text: $username)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                .autocapitalization(.none)
                 .padding()
 
             SecureField("Password", text: $password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                .autocapitalization(.none)
                 .padding()
 
             Button(action: {
