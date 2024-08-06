@@ -43,13 +43,13 @@ struct Top100CryptocurrenciesView: View {
                                     
                                     Text(crypto.symbol.uppercased())
                                 }
-                                .frame(width: 120, alignment: .leading)
+                                .frame(width: 100, alignment: .leading)
                                 
                                 Text("$\(crypto.current_price, specifier: "%.2f")")
-                                    .frame(width: 100, alignment: .trailing)
+                                    .frame(width: 90, alignment: .trailing)
                                 
                                 Text(formattedMarketCap(crypto.market_cap))
-                                    .frame(width: 130, alignment: .trailing)
+                                    .frame(width: 110, alignment: .trailing)
                             }
                             .padding(.vertical, 5)
                         }

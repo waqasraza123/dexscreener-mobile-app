@@ -77,6 +77,10 @@ struct LoginView: View {
 
                 
                 NavigationLink(destination: SignUpView()) {
+                    
+                    Text("Dont have an account?")
+                        .foregroundColor(.gray)
+                    
                     Text("Sign Up")
                         .foregroundColor(.orange)
                         .padding()

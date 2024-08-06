@@ -25,7 +25,7 @@
 		77FBAB862C4392C000707C3D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBAB852C4392C000707C3D /* ContentView.swift */; };
 		77FBAB882C4392C100707C3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77FBAB872C4392C100707C3D /* Assets.xcassets */; };
 		77FBAB8B2C4392C100707C3D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77FBAB8A2C4392C100707C3D /* Preview Assets.xcassets */; };
-		77FBAB922C43975E00707C3D /* Signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBAB912C43975E00707C3D /* Signup.swift */; };
+		77FBAB922C43975E00707C3D /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBAB912C43975E00707C3D /* SignupView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,7 +48,7 @@
 		77FBAB852C4392C000707C3D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		77FBAB872C4392C100707C3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77FBAB8A2C4392C100707C3D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		77FBAB912C43975E00707C3D /* Signup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup.swift; sourceTree = "<group>"; };
+		77FBAB912C43975E00707C3D /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +65,7 @@
 		779C61EC2C5CBD7400A7FCAD /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				77149B5A2C490DD800B2DE6F /* Constants.swift */,
 				779C61ED2C5CBDA800A7FCAD /* FormatMarketCap.swift */,
 			);
 			path = Helpers;
@@ -92,6 +93,8 @@
 		77A5C8342C43BEE2008B3350 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				77FBAB852C4392C000707C3D /* ContentView.swift */,
+				77FBAB912C43975E00707C3D /* SignupView.swift */,
 				77A5C8372C43BF30008B3350 /* TokensView.swift */,
 				77B6E5DF2C58F81100D3040D /* FilterView.swift */,
 				7767FAEA2C5A091F002BFA0A /* TokenChartView.swift */,
@@ -127,11 +130,8 @@
 				77A5C8332C43BEDD008B3350 /* ViewModels */,
 				77A5C8302C43BE3E008B3350 /* Models */,
 				77FBAB832C4392C000707C3D /* DexScreenerApp.swift */,
-				77FBAB852C4392C000707C3D /* ContentView.swift */,
 				77FBAB872C4392C100707C3D /* Assets.xcassets */,
 				77FBAB892C4392C100707C3D /* Preview Content */,
-				77FBAB912C43975E00707C3D /* Signup.swift */,
-				77149B5A2C490DD800B2DE6F /* Constants.swift */,
 			);
 			path = DexScreener;
 			sourceTree = "<group>";
@@ -227,7 +227,7 @@
 				77E279BA2C61E79F00C0393D /* LoginView.swift in Sources */,
 				779C61EE2C5CBDA800A7FCAD /* FormatMarketCap.swift in Sources */,
 				77161CB02C5BDCA2000FE121 /* GeckoToken.swift in Sources */,
-				77FBAB922C43975E00707C3D /* Signup.swift in Sources */,
+				77FBAB922C43975E00707C3D /* SignupView.swift in Sources */,
 				779C61F02C5CD71900A7FCAD /* OHLCChartView.swift in Sources */,
 				77A5C8322C43BE65008B3350 /* Token.swift in Sources */,
 				77161CB42C5BDD8A000FE121 /* Top100CryptocurrenciesView.swift in Sources */,
