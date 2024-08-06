@@ -12,6 +12,9 @@ struct ContentView: View {
                     LoginView(isLoggedIn: $isLoggedIn)
                 }
             }
+            .navigationDestination(for: GeckoToken.self) { crypto in
+                OHLCChartView(tokenId: crypto.id)
+            }
         }
     }
 }
