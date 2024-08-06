@@ -41,7 +41,7 @@ struct SignUpView: View {
                     .background(Color.blue)
                     .cornerRadius(15.0)
             }
-            NavigationLink(destination: loginView()) {
+            NavigationLink(destination: LoginView(isLoggedIn: $isSignUpSuccessful)) {
                 Text("Login")
                     .foregroundColor(.blue)
                     .padding()
