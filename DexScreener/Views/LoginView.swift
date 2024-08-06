@@ -8,7 +8,7 @@ struct LoginView: View {
     @State private var isLoading: Bool = false // State for showing loading spinner
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack() {
             if isLoading {
                 // Show loading spinner when isLoading is true
                 ProgressView()
@@ -32,12 +32,12 @@ struct LoginView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .autocapitalization(.none)
                     .padding()
-
+                
                 SecureField("••••••••", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .autocapitalization(.none)
                     .padding()
-
+                
                 Button(action: {
                     login()
                 }) {
@@ -45,8 +45,8 @@ struct LoginView: View {
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .background(Color.orange) // Updated button color
+                        .frame(width: 150, alignment: .center)
+                        .background(Color.orange)
                         .cornerRadius(15.0)
                 }
                 .padding(.top, 20) // Add padding to top to separate from fields
