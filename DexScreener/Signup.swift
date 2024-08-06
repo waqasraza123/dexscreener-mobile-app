@@ -28,13 +28,16 @@ struct SignUpView: View {
     func signUp() {
         // Validation code
 
-        let url = URL(string: "http://your-backend-url/register")!
+        let endpoint = "/auth/register"
+        guard let url = URL(string: Constants.apiUrl + endpoint) else {
+            print("Invalid URL")
+            return
+        }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
 
         let parameters: [String: String] = [
-            "username": username,
             "password": password,
             "email": email
         ]
@@ -52,6 +55,4 @@ struct SignUpView: View {
             }
         }.resume()
     }
-    
-    // Validation functions
 }
