@@ -58,11 +58,11 @@ struct SignUpView: View {
                 }
                 .padding(.top, 20)
                 
-                Spacer() // Pushes the Login button to the bottom
-                
                 NavigationLink(destination: LoginView(isLoggedIn: $isSignUpSuccessful)) {
-                    Text("Login")
-                        .foregroundColor(.blue)
+                    Text("Already have a acoount?")
+                        .foregroundColor(.gray)
+                    Text("Sign in")
+                        .foregroundColor(.orange)
                         .padding()
                 }
                 .padding(.bottom, 20) // Add padding to bottom for spacing
