@@ -53,7 +53,7 @@ struct SignUpView: View {
                         .foregroundColor(.white)
                         .padding()
                         .frame(width: 220, height: 60)
-                        .background(Color.blue)
+                        .background(Color.orange)
                         .cornerRadius(15.0)
                 }
                 .padding(.top, 20)
@@ -61,11 +61,13 @@ struct SignUpView: View {
                 NavigationLink(destination: LoginView(isLoggedIn: $isSignUpSuccessful)) {
                     Text("Already have a acoount?")
                         .foregroundColor(.gray)
+                        .frame(alignment: Alignment.trailing)
                     Text("Sign in")
                         .foregroundColor(.orange)
                         .padding()
                 }
-                .padding(.bottom, 20) // Add padding to bottom for spacing
+                .padding(.top, 100)
+                .padding(.bottom, 20)
             }
             .padding()
         }
