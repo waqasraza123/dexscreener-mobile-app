@@ -1,5 +1,21 @@
 import SwiftUI
 
+struct CustomTextFieldStyle: TextFieldStyle {
+    var height: CGFloat
+    var cornerRadius: CGFloat
+    var padding: CGFloat
+
+    func _body(configuration: TextField<_Label>) -> some View {
+        configuration
+            .padding(padding)
+            .background(Color.white)
+            .cornerRadius(cornerRadius)
+            .frame(height: height)
+            .overlay(RoundedRectangle(cornerRadius: cornerRadius)
+                        .stroke(Color.gray, lineWidth: 1))
+    }
+}
+
 struct LoginView: View {
     @Binding var isLoggedIn: Bool
     @State private var username: String = ""
@@ -8,7 +24,7 @@ struct LoginView: View {
     @State private var isLoading: Bool = false // State for showing loading spinner
     
     var body: some View {
-        VStack() {
+        VStack {
             if isLoading {
                 // Show loading spinner when isLoading is true
                 ProgressView()
@@ -16,55 +32,58 @@ struct LoginView: View {
                     .scaleEffect(1.5, anchor: .center)
                     .padding()
             } else {
-                // Header text
-                Text("Login")
-                    .font(.title.bold())
-                    .foregroundColor(.black)
-                    .padding(.bottom, 1)
-                
-                Text("Please sign in to continue.")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                    .padding(.bottom, 20)
-                
-                // Login form
-                TextField("user123@email.com", text: $username)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .autocapitalization(.none)
-                    .padding()
-                
-                SecureField("••••••••", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .autocapitalization(.none)
-                    .padding()
-                
-                Button(action: {
-                    login()
-                }) {
-                    Text("LOGIN")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(width: 150, alignment: .center)
-                        .background(Color.orange)
-                        .cornerRadius(15.0)
+                VStack(alignment: .leading) {
+                    // Header text
+                    Text("Login")
+                        .font(.title.bold())
+                        .foregroundColor(.black)
+                        .padding(.bottom, 1)
+                    
+                    Text("Please sign in to continue.")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                        .padding(.bottom, 20)
+                    
+                    // Login form
+                    TextField("user123@email.com", text: $username)
+                        .textFieldStyle(CustomTextFieldStyle(height: 50, cornerRadius: 10, padding: 16))
+                        .autocapitalization(.none)
+                    
+                    SecureField("••••••••", text: $password)
+                        .textFieldStyle(CustomTextFieldStyle(height: 50, cornerRadius: 10, padding: 16))
+                        .autocapitalization(.none)
+                    
+                    Button(action: {
+                        login()
+                    }) {
+                        Text("LOGIN")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(width: 150, alignment: .center)
+                            .background(Color.orange)
+                            .cornerRadius(15.0)
+                    }
+                    .padding(.top, 20) // Add padding to top to separate from fields
+                    
+                    if let errorMessage = errorMessage {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .padding()
+                    }
                 }
-                .padding(.top, 20) // Add padding to top to separate from fields
+                .padding()
+                
+                Spacer()
                 
                 NavigationLink(destination: SignUpView()) {
                     Text("Sign Up")
                         .foregroundColor(.orange)
                         .padding()
                 }
-                
-                if let errorMessage = errorMessage {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                        .padding()
-                }
+                .padding(.bottom, 20) // Add padding to bottom for spacing
             }
         }
-        .padding()
         .background(Color.white) // Background color for the view
     }
     
