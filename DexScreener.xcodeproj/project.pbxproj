@@ -13,6 +13,9 @@
 		77161CB42C5BDD8A000FE121 /* Top100CryptocurrenciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77161CB32C5BDD8A000FE121 /* Top100CryptocurrenciesView.swift */; };
 		7767FAEB2C5A091F002BFA0A /* TokenChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7767FAEA2C5A091F002BFA0A /* TokenChartView.swift */; };
 		777508192C6287A40008D12E /* CustomStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777508182C6287A40008D12E /* CustomStyles.swift */; };
+		779B6A972C63780600399F0F /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 779B6A962C63780600399F0F /* DGCharts */; };
+		779B6A992C63780600399F0F /* DGChartsDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 779B6A982C63780600399F0F /* DGChartsDynamic */; };
+		779B6A9B2C637B9B00399F0F /* OHLCChartRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779B6A9A2C637B9B00399F0F /* OHLCChartRepresentable.swift */; };
 		779C61EE2C5CBDA800A7FCAD /* FormatMarketCap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779C61ED2C5CBDA800A7FCAD /* FormatMarketCap.swift */; };
 		779C61F02C5CD71900A7FCAD /* OHLCChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779C61EF2C5CD71900A7FCAD /* OHLCChartView.swift */; };
 		779C61F22C5D1C0B00A7FCAD /* OHLCData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779C61F12C5D1C0B00A7FCAD /* OHLCData.swift */; };
@@ -36,6 +39,7 @@
 		77161CB32C5BDD8A000FE121 /* Top100CryptocurrenciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Top100CryptocurrenciesView.swift; sourceTree = "<group>"; };
 		7767FAEA2C5A091F002BFA0A /* TokenChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenChartView.swift; sourceTree = "<group>"; };
 		777508182C6287A40008D12E /* CustomStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStyles.swift; sourceTree = "<group>"; };
+		779B6A9A2C637B9B00399F0F /* OHLCChartRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OHLCChartRepresentable.swift; sourceTree = "<group>"; };
 		779C61ED2C5CBDA800A7FCAD /* FormatMarketCap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatMarketCap.swift; sourceTree = "<group>"; };
 		779C61EF2C5CD71900A7FCAD /* OHLCChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OHLCChartView.swift; sourceTree = "<group>"; };
 		779C61F12C5D1C0B00A7FCAD /* OHLCData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OHLCData.swift; sourceTree = "<group>"; };
@@ -58,6 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				779B6A992C63780600399F0F /* DGChartsDynamic in Frameworks */,
+				779B6A972C63780600399F0F /* DGCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +111,7 @@
 				77161CB32C5BDD8A000FE121 /* Top100CryptocurrenciesView.swift */,
 				779C61EF2C5CD71900A7FCAD /* OHLCChartView.swift */,
 				77E279B92C61E79F00C0393D /* LoginView.swift */,
+				779B6A9A2C637B9B00399F0F /* OHLCChartRepresentable.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -163,6 +170,10 @@
 			dependencies = (
 			);
 			name = DexScreener;
+			packageProductDependencies = (
+				779B6A962C63780600399F0F /* DGCharts */,
+				779B6A982C63780600399F0F /* DGChartsDynamic */,
+			);
 			productName = DexScreener;
 			productReference = 77FBAB802C4392C000707C3D /* DexScreener.app */;
 			productType = "com.apple.product-type.application";
@@ -191,6 +202,9 @@
 				Base,
 			);
 			mainGroup = 77FBAB772C4392C000707C3D;
+			packageReferences = (
+				779B6A952C63780600399F0F /* XCRemoteSwiftPackageReference "Charts" */,
+			);
 			productRefGroup = 77FBAB812C4392C000707C3D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -228,6 +242,7 @@
 				77161CB22C5BDD15000FE121 /* GeckoViewModel.swift in Sources */,
 				779C61F22C5D1C0B00A7FCAD /* OHLCData.swift in Sources */,
 				77E279BA2C61E79F00C0393D /* LoginView.swift in Sources */,
+				779B6A9B2C637B9B00399F0F /* OHLCChartRepresentable.swift in Sources */,
 				779C61EE2C5CBDA800A7FCAD /* FormatMarketCap.swift in Sources */,
 				77161CB02C5BDCA2000FE121 /* GeckoToken.swift in Sources */,
 				77FBAB922C43975E00707C3D /* SignupView.swift in Sources */,
@@ -435,6 +450,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		779B6A952C63780600399F0F /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ChartsOrg/Charts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		779B6A962C63780600399F0F /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 779B6A952C63780600399F0F /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
+		};
+		779B6A982C63780600399F0F /* DGChartsDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 779B6A952C63780600399F0F /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGChartsDynamic;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 77FBAB782C4392C000707C3D /* Project object */;
 }
