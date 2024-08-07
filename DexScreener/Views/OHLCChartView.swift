@@ -12,6 +12,9 @@ struct OHLCChartView: View {
             if isLoading {
                 ProgressView("Loading OHLC Data...") // Show loading indicator
                     .progressViewStyle(CircularProgressViewStyle())
+                    .onAppear {
+                        print("ProgressView is appearing, data is loading...")
+                    }
             } else {
                 Chart(ohlcData) { dataPoint in
                     LineMark(
@@ -25,25 +28,37 @@ struct OHLCChartView: View {
                 .chartYAxis {
                     AxisMarks()
                 }
+                .onAppear {
+                    print("Chart is appearing with \(ohlcData.count) data points.")
+                    // Print the chart data points for debugging
+                    print("OHLC Data: \(ohlcData.map { "\($0.timestamp): \($0.close)" })")
+                }
             }
         }
         .onAppear {
+            print("OHLCChartView appeared, starting data fetch for tokenId: \(tokenId).")
             fetchOHLCData()
         }
         .navigationTitle("OHLC Chart")
     }
     
     private func fetchOHLCData() {
+        print("Fetching OHLC data for tokenId: \(tokenId)...")
+        
         geckoViewModel.fetchOHLCData(for: tokenId) { result in
             switch result {
             case .success(let data):
+                print("Successfully fetched OHLC data with \(data.count) data points.")
+                // Print each data point for debugging
+                data.forEach { dataPoint in
+                    print("Data Point - Timestamp: \(dataPoint.timestamp), Open: \(dataPoint.open), High: \(dataPoint.high), Low: \(dataPoint.low), Close: \(dataPoint.close)")
+                }
                 ohlcData = data
                 isLoading = false
             case .failure(let error):
-                print("Failed to load OHLC data: \(error)")
+                print("Failed to load OHLC data: \(error.localizedDescription)")
                 isLoading = false
             }
         }
     }
-
 }
