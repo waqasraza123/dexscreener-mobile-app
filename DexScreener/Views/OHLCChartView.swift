@@ -10,17 +10,27 @@ struct OHLCChartView: View {
     var body: some View {
         VStack {
             if isLoading {
-                ProgressView("Loading OHLC Data...") // Show loading indicator
+                ProgressView("Loading OHLC Data...")
                     .progressViewStyle(CircularProgressViewStyle())
                     .onAppear {
                         print("ProgressView is appearing, data is loading...")
                     }
             } else {
                 Chart(ohlcData) { dataPoint in
-                    LineMark(
+                    // Candlestick representation
+                    BarMark(
                         x: .value("Date", dataPoint.timestamp),
-                        y: .value("Price", dataPoint.close)
+                        yStart: .value("Low", dataPoint.low),
+                        yEnd: .value("High", dataPoint.high)
                     )
+                    .foregroundStyle(dataPoint.close >= dataPoint.open ? Color.green : Color.red)
+                    
+                    BarMark(
+                        x: .value("Date", dataPoint.timestamp),
+                        yStart: .value("Open", dataPoint.open),
+                        yEnd: .value("Close", dataPoint.close)
+                    )
+                    .foregroundStyle(Color.black)
                 }
                 .chartXAxis {
                     AxisMarks(values: .stride(by: .month))
@@ -31,7 +41,7 @@ struct OHLCChartView: View {
                 .onAppear {
                     print("Chart is appearing with \(ohlcData.count) data points.")
                     // Print the chart data points for debugging
-                    print("OHLC Data: \(ohlcData.map { "\($0.timestamp): \($0.close)" })")
+                    print("OHLC Data: \(ohlcData.map { "\($0.timestamp): \($0.open) \($0.high) \($0.low) \($0.close)" })")
                 }
             }
         }
