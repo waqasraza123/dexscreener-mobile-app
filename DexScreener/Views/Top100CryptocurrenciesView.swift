@@ -40,7 +40,7 @@ struct Top100CryptocurrenciesView: View {
                                 }
                                 
                                 Text(crypto.symbol.uppercased())
-                                    .frame(width: 100, alignment: .leading)
+                                    .frame(width: 70, alignment: .leading)
                                 
                                 Text("$\(crypto.current_price, specifier: "%.2f")")
                                     .frame(width: 90, alignment: .trailing)
@@ -48,7 +48,7 @@ struct Top100CryptocurrenciesView: View {
                                 Text(formattedMarketCap(crypto.market_cap))
                                     .frame(width: 110, alignment: .trailing)
                             }
-                            .padding(.vertical, 5)
+                            .padding()
                         }
                     }
                     .navigationTitle("Top 100+ Tokens")
