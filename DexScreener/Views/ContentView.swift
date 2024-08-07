@@ -8,9 +8,6 @@ struct ContentView: View {
             Group {
                 if isLoggedIn {
                     HomeView()
-                        .navigationDestination(for: GeckoToken.self) { crypto in
-                            OHLCChartView(tokenId: crypto.id)
-                        }
                 } else {
                     LoginView(isLoggedIn: $isLoggedIn)
                 }
